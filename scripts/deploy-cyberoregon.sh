@@ -49,6 +49,8 @@ if find "$release" -name '.env*' ! -name '.env.example' -print -quit | grep -q .
 fi
 ln -s "$APP/.env.production" "$release/.env.production"
 printf '%s\n' "$sha" > "$release/.deploy-sha"
+chown deploy:deploy "$release/.deploy-sha"
+as_deploy test -r "$release/.deploy-sha"
 as_deploy bash -c 'cd "$1" && npm ci --include=dev --no-audit --no-fund && npm run lint && NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max-old-space-size=1536 npm run build' -- "$release"
 test -f "$release/.next/BUILD_ID"
 
