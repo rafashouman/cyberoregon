@@ -1,0 +1,57 @@
+name: Deploy CyberOregon
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cyberoregon-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_PORT: ${{ secrets.VPS_PORT || '22' }}
+      VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+      VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+    steps:
+      - name: Validar configurações e preparar SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in VPS_HOST VPS_USER VPS_PORT VPS_SSH_KEY VPS_KNOWN_HOSTS; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Configure o secret $name em Settings > Secrets and variables > Actions."
+              exit 1
+            fi
+          done
+          umask 077
+          mkdir -p "$HOME/.ssh"
+          printf '%s\n' "$VPS_SSH_KEY" | tr -d '\r' > "$HOME/.ssh/cyberoregon"
+          printf '%s\n' "$VPS_KNOWN_HOSTS" | tr -d '\r' > "$HOME/.ssh/known_hosts"
+          ssh-keygen -y -P '' -f "$HOME/.ssh/cyberoregon" > /dev/null
+
+      - name: Compilar e publicar o commit na VPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -T -i "$HOME/.ssh/cyberoregon" -p "$VPS_PORT" \
+            -o BatchMode=yes -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes -o ConnectTimeout=20 \
+            -o ServerAliveInterval=30 -o ServerAliveCountMax=10 \
+            "$VPS_USER@$VPS_HOST" \
+            "sudo -n /usr/local/bin/deploy-cyberoregon '$GITHUB_SHA'"
+
+      - name: Remover chave temporária do runner
+        if: always()
+        shell: bash
+        run: rm -f "$HOME/.ssh/cyberoregon"
