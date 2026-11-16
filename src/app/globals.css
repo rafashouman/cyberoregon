@@ -3,11 +3,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-display: var(--font-display);
-  --font-sans: var(--font-sans);
+  --font-display: "Montserrat", sans-serif;
+  --font-sans: "Geist", sans-serif;
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 7rem;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;

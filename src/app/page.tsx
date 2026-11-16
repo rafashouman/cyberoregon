@@ -20,6 +20,7 @@ import {
   MessageCircle,
   ChevronDown,
   Crosshair,
+  Mail,
 } from "lucide-react";
 
 import { openTrackedWhatsApp } from "@/components/MetaPixel";
@@ -248,7 +249,7 @@ const Hero = () => {
   const [activeScanTab, setActiveScanTab] = useState<"pentest" | "surface" | "compliance">("pentest");
 
   return (
-    <section className="relative pt-28 sm:pt-36 lg:pt-44 pb-20 lg:pb-28 overflow-hidden bg-[#020b1f]">
+    <section className="relative pt-32 sm:pt-36 lg:pt-48 pb-20 lg:pb-28 overflow-hidden bg-[#020b1f]">
       {/* Imagem de Background Hero Anexada */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
         <Image
@@ -1526,9 +1527,10 @@ const Footer = () => {
             </div>
             <a
               href="mailto:contato@cyberoregon.com.br"
-              className="border-t border-white/10 pt-4 text-sm font-mono text-[#00EAFF] hover:text-cyan-200 transition-colors"
+              className="flex items-center gap-2 border-t border-white/10 pt-4 text-sm font-mono text-[#00EAFF] hover:text-cyan-200 transition-colors"
             >
-              Fale Conosco: contato@cyberoregon.com.br
+              <Mail aria-hidden="true" className="w-4 h-4 shrink-0" />
+              contato@cyberoregon.com.br
             </a>
           </div>
         </div>

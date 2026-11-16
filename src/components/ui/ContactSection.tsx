@@ -58,7 +58,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contato" className="py-24 lg:py-32 relative overflow-hidden bg-[#020b1f]">
+    <section id="contato" className="pt-32 sm:pt-36 lg:pt-48 pb-24 lg:pb-32 relative overflow-hidden bg-[#020b1f]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="relative rounded-3xl bg-[#04122C] border border-[#00D4FF]/50 p-6 sm:p-10 lg:p-14 shadow-[0_30px_90px_rgba(0,0,0,0.9)] overflow-hidden">
           {/* Background Image inside CTA Container */}
@@ -73,45 +73,9 @@ export const ContactSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#020b1f] via-[#020b1f]/90 to-[#04122C]/85" />
           </div>
 
-          <div className="relative z-10 grid lg:grid-cols-12 gap-10 items-center">
-            {/* Left Callout */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/35 mb-5 backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-full bg-[#00EAFF] animate-pulse shadow-[0_0_8px_#00EAFF]" />
-                <span className="font-mono text-[11px] font-bold text-[#00EAFF] tracking-widest">[SEC-07]</span>
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-100 font-semibold">Canal Direto com Especialistas</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-                Proteja a reputação e a continuidade do seu negócio hoje.
-              </h2>
-              <p className="text-slate-200 text-base leading-relaxed">
-                Agende uma reunião técnica de alinhamento sob NDA. Nossos engenheiros avaliam sua arquitetura e entregam um plano de ação sob medida em até 24h.
-              </p>
-
-              <div className="space-y-3.5 pt-2">
-                <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
-                    <Lock className="w-4 h-4" />
-                  </div>
-                  <span>Assinatura de NDA (Acordo de Confidencialidade) antes do briefing</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
-                    <Zap className="w-4 h-4" />
-                  </div>
-                  <span>Atendimento ágil diretamente com líder de Segurança Ofensiva</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
-                    <Award className="w-4 h-4" />
-                  </div>
-                  <span>Escopos completos de Pentest, Red Team e Security Review</span>
-                </div>
-              </div>
-            </div>
-
+          <div className="relative z-10 grid lg:grid-cols-12 gap-10 items-start">
             {/* Right Form */}
-            <div className="lg:col-span-6">
+            <div className="lg:order-2 lg:col-span-6">
               <div className="rounded-2xl bg-[#020b1f]/95 border border-[#00D4FF]/30 p-6 sm:p-8 backdrop-blur-xl">
                 {submitted ? (
                   <div className="text-center py-8 space-y-4">
@@ -298,6 +262,42 @@ export const ContactSection = () => {
                     </button>
                   </form>
                 )}
+              </div>
+            </div>
+
+            {/* Left Callout */}
+            <div className="lg:order-1 lg:col-span-6 space-y-6">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/35 mb-5 backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-[#00EAFF] animate-pulse shadow-[0_0_8px_#00EAFF]" />
+                <span className="font-mono text-[11px] font-bold text-[#00EAFF] tracking-widest">[SEC-07]</span>
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-100 font-semibold">Canal Direto com Especialistas</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                Proteja a reputação e a continuidade do seu negócio hoje.
+              </h2>
+              <p className="text-slate-200 text-base leading-relaxed">
+                Agende uma reunião técnica de alinhamento sob NDA. Nossos engenheiros avaliam sua arquitetura e entregam um plano de ação sob medida em até 24h.
+              </p>
+
+              <div className="space-y-3.5 pt-2">
+                <div className="flex items-center gap-3 text-sm text-slate-200">
+                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
+                    <Lock className="w-4 h-4" />
+                  </div>
+                  <span>Assinatura de NDA (Acordo de Confidencialidade) antes do briefing</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-slate-200">
+                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
+                    <Zap className="w-4 h-4" />
+                  </div>
+                  <span>Atendimento ágil diretamente com líder de Segurança Ofensiva</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-slate-200">
+                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
+                    <Award className="w-4 h-4" />
+                  </div>
+                  <span>Escopos completos de Pentest, Red Team e Security Review</span>
+                </div>
               </div>
             </div>
           </div>
