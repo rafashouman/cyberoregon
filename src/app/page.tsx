@@ -305,6 +305,12 @@ const Navbar = () => {
             <ShieldCheck className="w-3.5 h-3.5" />
             Dimensionar Escopo sob NDA
           </a>
+          <a
+            href="mailto:contato@cyberoregon.com.br"
+            className="text-slate-300 hover:text-[#00EAFF] transition-colors normal-case"
+          >
+            Fale Conosco: contato@cyberoregon.com.br
+          </a>
         </div>
       </div>
 
@@ -1985,21 +1991,29 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-6 text-xs font-mono uppercase tracking-wider text-slate-300">
-            <a href="#solucoes" className="hover:text-[#00EAFF] transition-colors">
-              Soluções
-            </a>
-            <a href="#simulador" className="hover:text-[#00EAFF] transition-colors">
-              Simulador de Escopo
-            </a>
-            <a href="#metodologia" className="hover:text-[#00EAFF] transition-colors">
-              Metodologia
-            </a>
-            <a href="#faq" className="hover:text-[#00EAFF] transition-colors">
-              FAQ
-            </a>
-            <a href="#contato" className="text-[#00EAFF] hover:underline">
-              Solicitar Proposta
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-wrap gap-6 text-xs font-mono uppercase tracking-wider text-slate-300">
+              <a href="#solucoes" className="hover:text-[#00EAFF] transition-colors">
+                Soluções
+              </a>
+              <a href="#simulador" className="hover:text-[#00EAFF] transition-colors">
+                Simulador de Escopo
+              </a>
+              <a href="#metodologia" className="hover:text-[#00EAFF] transition-colors">
+                Metodologia
+              </a>
+              <a href="#faq" className="hover:text-[#00EAFF] transition-colors">
+                FAQ
+              </a>
+              <a href="#contato" className="text-[#00EAFF] hover:underline">
+                Solicitar Proposta
+              </a>
+            </div>
+            <a
+              href="mailto:contato@cyberoregon.com.br"
+              className="border-t border-white/10 pt-4 text-sm font-mono text-[#00EAFF] hover:text-cyan-200 transition-colors"
+            >
+              Fale Conosco: contato@cyberoregon.com.br
             </a>
           </div>
         </div>
