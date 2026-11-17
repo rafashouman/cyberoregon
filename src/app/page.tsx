@@ -23,7 +23,7 @@ import {
   Mail,
 } from "lucide-react";
 
-import { openTrackedWhatsApp } from "@/components/MetaPixel";
+import { trackMetaEvent } from "@/components/MetaPixel";
 import { CountUp, Reveal } from "@/components/ui/MotionKit";
 import { useDemoTheme } from "@/components/ui/DemoShell";
 import { StickyMobileCta } from "@/components/ui/StickyMobileCta";
@@ -32,22 +32,18 @@ import {
   LOGO_LIGHT_SRC,
   SiteHeader,
 } from "@/components/ui/SiteHeader";
+import { contactHref, type ContactServiceKey } from "@/lib/contact";
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E CONSTANTES
 // ==========================================
-const WHATSAPP_NUMBER = "5551993583936";
 const CURRENT_YEAR = 2026;
-
-const DEFAULT_WA_MSG = encodeURIComponent(
-  "Olá! Gostaria de falar com um especialista da CyberOregon sobre Pentest e soluções de cibersegurança para minha empresa."
-);
 
 // ==========================================
 // DADOS DO ECOSSISTEMA DE SEGURANÇA (ESTILO GUARDSI)
 // ==========================================
 interface SolutionItem {
-  id: string;
+  id: "pentest" | "red-team" | "security-review";
   tag: string;
   title: string;
   subtitle: string;
@@ -317,14 +313,11 @@ const Hero = () => {
               </a>
 
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${DEFAULT_WA_MSG}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-meta-content-name="CyberOregon Hero"
+                href="/contato"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#051430]/90 hover:bg-[#09224C] border border-[#00D4FF]/40 text-white font-bold text-sm transition-all backdrop-blur-md"
               >
                 <MessageCircle className="w-4 h-4 text-[#00EAFF]" />
-                <span>Falar com Especialista Agora</span>
+                <span>Falar com Especialista</span>
               </a>
             </div>
 
@@ -758,11 +751,7 @@ const SolutionsSection = () => {
                     </div>
 
                     <a
-                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                        `Olá! Quero solicitar uma proposta da CyberOregon para a solução: ${current.title}.`
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={contactHref(current.id)}
                       className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#0088CC] to-[#00EAFF] text-[#020b1f] font-black text-xs uppercase tracking-wider shrink-0 hover:opacity-95 transition-all"
                     >
                       <span>Solicitar Escopo deste Serviço</span>
@@ -910,13 +899,13 @@ const PentestScopeCalculator = () => {
   const [companySize, setCompanySize] = useState<"startup" | "mid" | "enterprise">("mid");
   const [complianceNeed, setComplianceNeed] = useState<string>("Prevenção Proativa & Redução de Risco");
 
-  const targetOptions = [
-    { id: "web-api", label: "Pentest Web / APIs / Mobile", days: 5 },
-    { id: "ai-mcp", label: "Pentest em IA / MCP / Kiosk / Desktop", days: 5 },
-    { id: "capt-code", label: "Code Assisted Pen Test (CAPT) & Source Code Review", days: 4 },
-    { id: "red-team", label: "Red Team / Engenharia Social / Purple Team / Assumed Breach", days: 6 },
-    { id: "identity-m365", label: "Review Microsoft Entra ID / Active Directory / M365", days: 4 },
-    { id: "cloud-pipeline", label: "Cloud / Build Pipeline / Segmentation / Gestão de Vulnerabilidades", days: 5 },
+  const targetOptions: { id: string; label: string; days: number; service: ContactServiceKey }[] = [
+    { id: "web-api", label: "Pentest Web / APIs / Mobile", days: 5, service: "pentest" },
+    { id: "ai-mcp", label: "Pentest em IA / MCP / Kiosk / Desktop", days: 5, service: "pentest" },
+    { id: "capt-code", label: "Code Assisted Pen Test (CAPT) & Source Code Review", days: 4, service: "code" },
+    { id: "red-team", label: "Red Team / Engenharia Social / Purple Team / Assumed Breach", days: 6, service: "red-team" },
+    { id: "identity-m365", label: "Review Microsoft Entra ID / Active Directory / M365", days: 4, service: "security-review" },
+    { id: "cloud-pipeline", label: "Cloud / Build Pipeline / Segmentation / Gestão de Vulnerabilidades", days: 5, service: "security-review" },
   ];
 
   const toggleTarget = (id: string) => {
@@ -953,23 +942,21 @@ const PentestScopeCalculator = () => {
     },
   };
 
-  const handleSendScopeWhatsApp = () => {
-    const targetNames = selectedTargets
-      .map((id) => targetOptions.find((t) => t.id === id)?.label)
-      .filter(Boolean)
-      .join(", ");
-
-    const msg = `Olá! Usei o Simulador de Escopo da CyberOregon e gostaria de receber uma proposta comercial:\n\n• *Ativos a testar:* ${targetNames}\n• *Abordagem:* ${boxDescriptions[boxMode].title}\n• *Porte da Operação:* ${companySize.toUpperCase()}\n• *Objetivo Principal:* ${complianceNeed}\n• *Estimativa prévia:* ~${estimatedDays} dias úteis (${specialistsCount} especialistas OSCP/OSWE + 1 Reteste incluso).`;
-
-    openTrackedWhatsApp(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
-      "Contact",
-      {
-        content_name: "Simulador de Escopo Pentest CyberOregon",
-        content_category: boxMode,
-      }
-    );
+  const selectedOptions = targetOptions.filter((target) => selectedTargets.includes(target.id));
+  const selectedServices = [...new Set(selectedOptions.map((target) => target.service))];
+  const scopeService = selectedServices.length === 1 ? selectedServices[0] : "combined";
+  const sizeDescriptions = {
+    startup: "Ágil / SaaS em Crescimento",
+    mid: "Médio Porte / Múltiplos Módulos",
+    enterprise: "Enterprise / Missão Crítica",
   };
+  const scopeDetails = [
+    `Ativos a testar: ${selectedOptions.map((target) => target.label).join(", ")}`,
+    `Abordagem: ${boxDescriptions[boxMode].title}`,
+    `Complexidade do ambiente: ${sizeDescriptions[companySize]}`,
+    `Motivação principal: ${complianceNeed}`,
+    `Estimativa prévia: ${estimatedDays} dias úteis, ${specialistsCount} especialistas e 1 reteste incluso.`,
+  ].join("\n");
 
   return (
     <section id="simulador" className="py-24 lg:py-32 relative bg-[#020b1f] overflow-hidden">
@@ -1173,14 +1160,18 @@ const PentestScopeCalculator = () => {
             </div>
 
             <div className="relative z-10 space-y-3">
-              <button
-                type="button"
-                onClick={handleSendScopeWhatsApp}
+              <a
+                href={contactHref(scopeService, scopeDetails)}
+                onClick={() => trackMetaEvent("Contact", {
+                  currency: "BRL",
+                  content_name: "Simulador de Escopo Pentest CyberOregon",
+                  content_category: boxMode,
+                })}
                 className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#0088CC] via-[#00C4F0] to-[#00EAFF] text-[#020b1f] font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(0,234,255,0.4)] hover:opacity-95 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Receber Cotação deste Escopo no WhatsApp</span>
-              </button>
+                <Mail className="w-4 h-4" />
+                <span>Receber Cotação deste Escopo</span>
+              </a>
               <p className="text-[11px] font-mono text-center text-slate-300">
                 Atendimento direto por Engenheiro de Segurança • Sem robôs
               </p>
@@ -1309,7 +1300,7 @@ const WhyCyberOregon = () => {
               {[
                 {
                   title: "Comunicação Direta com os Pentesters",
-                  desc: "Canal exclusivo no Slack, Teams ou WhatsApp direto com os especialistas que estão testando seu ambiente — sem intermediários comerciais.",
+                  desc: "Canal exclusivo no Slack, Teams ou canal direto com os especialistas que estão testando seu ambiente — sem intermediários comerciais.",
                 },
                 {
                   title: "Relatórios Duplos: C-Level & Engenharia",
@@ -1569,7 +1560,7 @@ export default function CyberOregonLandingPage() {
       <Footer />
       <StickyMobileCta
         label="Solicitar Pentest / Especialista"
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${DEFAULT_WA_MSG}`}
+        href="/contato"
         className="bg-gradient-to-r from-[#0088CC] to-[#00EAFF] text-[#020b1f] shadow-[0_0_30px_rgba(0,234,255,0.45)]"
       />
     </div>

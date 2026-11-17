@@ -1,22 +1,43 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Award, AlertCircle, Lock, Loader2, Send, ShieldCheck, Zap } from "lucide-react";
 import { trackMetaEvent } from "@/components/MetaPixel";
 import { saveCyberOregonLead } from "@/app/actions/leads";
 import { Confetti } from "@/components/ui/MotionKit";
+import { CONTACT_SERVICES } from "@/lib/contact";
 
 export const ContactSection = () => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [service, setService] = useState("Pentest (Web / APIs / MCP / Mobile / IA / CAPT)");
+  const [service, setService] = useState<string>(CONTACT_SERVICES.pentest);
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  /* eslint-disable react-hooks/set-state-in-effect -- Restore the URL fragment after hydration. */
+  useEffect(() => {
+    const prefix = "#solicitacao?";
+    if (!window.location.hash.startsWith(prefix)) return;
+
+    const params = new URLSearchParams(window.location.hash.slice(prefix.length));
+    const selectedService = Object.entries(CONTACT_SERVICES).find(
+      ([key]) => key === params.get("service")
+    );
+    const details = params.get("details") ?? "";
+    if (!selectedService || details.length > 1500) {
+      setErrorMsg("Não foi possível preencher o escopo. Confira os campos antes de enviar.");
+      return;
+    }
+
+    setService(selectedService[1]);
+    setMessage(details);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -207,21 +228,11 @@ export const ContactSection = () => {
                         onChange={(e) => setService(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm focus:border-[#00EAFF] focus:outline-none"
                       >
-                        <option value="Pentest (Web / APIs / MCP / Mobile / IA / CAPT)">
-                          Pentest (Web / APIs / MCP / Mobile / IA / CAPT)
-                        </option>
-                        <option value="Pentest Interno, Externo, Kiosk & Desktop (Thick Client)">
-                          Pentest Interno, Externo, Kiosk &amp; Desktop (Thick Client)
-                        </option>
-                        <option value="Source Code Review & Code Assisted Pen Test (CAPT)">
-                          Source Code Review &amp; Code Assisted Pen Test (CAPT)
-                        </option>
-                        <option value="Red Team (Exercise, Engenharia Social, Purple Team, Assumed Breach)">
-                          Red Team (Exercise, Engenharia Social, Purple Team, Assumed Breach)
-                        </option>
-                        <option value="Security Review (Entra ID, AD, M365, Cloud, Pipeline & Gestão de Vulnerabilidades)">
-                          Security Review (Entra ID, AD, M365, Cloud, Pipeline &amp; Vulnerabilidades)
-                        </option>
+                        {Object.entries(CONTACT_SERVICES).map(([key, label]) => (
+                          <option key={key} value={label}>
+                            {label}
+                          </option>
+                        ))}
                       </select>
                     </div>
 

@@ -40,20 +40,6 @@ export const trackMetaEvent = (
   }
 };
 
-export const openTrackedWhatsApp = (
-  url: string,
-  eventName: "Lead" | "Purchase" | "Schedule" | "Contact" = "Lead",
-  params?: Record<string, unknown>
-) => {
-  trackMetaEvent(eventName, {
-    currency: "BRL",
-    ...params,
-  });
-  if (typeof window !== "undefined") {
-    window.open(url, "_blank", "noopener,noreferrer");
-  }
-};
-
 function RouteTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
