@@ -304,21 +304,21 @@ const Hero = () => {
             {/* Primary & Secondary CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
               <a
-                href="#simulador"
+                href="/contato"
                 className="group relative inline-flex items-center justify-center gap-3 px-7 py-4 rounded-xl bg-gradient-to-r from-[#0088CC] via-[#00C4F0] to-[#00EAFF] text-[#020b1f] font-black text-sm uppercase tracking-wider shadow-[0_0_35px_rgba(0,212,255,0.45)] hover:shadow-[0_0_50px_rgba(0,234,255,0.7)] transition-all active:scale-[0.98]"
               >
                 <Terminal className="w-4 h-4" />
-                <span>Dimensionar Escopo de Pentest</span>
+                <span>Falar com Especialista</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
 
-              <a
+              {/* <a
                 href="/contato"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#051430]/90 hover:bg-[#09224C] border border-[#00D4FF]/40 text-white font-bold text-sm transition-all backdrop-blur-md"
               >
                 <MessageCircle className="w-4 h-4 text-[#00EAFF]" />
                 <span>Falar com Especialista</span>
-              </a>
+              </a> */}
             </div>
 
             {/* Trust Metrics Strip */}
@@ -754,7 +754,7 @@ const SolutionsSection = () => {
                       href={contactHref(current.id)}
                       className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#0088CC] to-[#00EAFF] text-[#020b1f] font-black text-xs uppercase tracking-wider shrink-0 hover:opacity-95 transition-all"
                     >
-                      <span>Solicitar Escopo deste Serviço</span>
+                      <span>Fale com um Especialista</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </a>
                   </div>
@@ -1170,10 +1170,10 @@ const PentestScopeCalculator = () => {
                 className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#0088CC] via-[#00C4F0] to-[#00EAFF] text-[#020b1f] font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(0,234,255,0.4)] hover:opacity-95 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
               >
                 <Mail className="w-4 h-4" />
-                <span>Receber Cotação deste Escopo</span>
+                <span>Falar com Especialista sobre este Escopo</span>
               </a>
               <p className="text-[11px] font-mono text-center text-slate-300">
-                Atendimento direto por Engenheiro de Segurança • Sem robôs
+                Estimativa preliminar: alinhamos o escopo em conversa antes do orçamento final.
               </p>
             </div>
           </div>
@@ -1559,7 +1559,7 @@ export default function CyberOregonLandingPage() {
       </main>
       <Footer />
       <StickyMobileCta
-        label="Solicitar Pentest / Especialista"
+        label="Falar com Especialista"
         href="/contato"
         className="bg-gradient-to-r from-[#0088CC] to-[#00EAFF] text-[#020b1f] shadow-[0_0_30px_rgba(0,234,255,0.45)]"
       />

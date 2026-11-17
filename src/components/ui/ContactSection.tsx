@@ -105,24 +105,24 @@ export const ContactSection = () => {
                       <ShieldCheck className="w-7 h-7" />
                     </div>
                     <h3 className="text-xl font-black text-white">
-                      Solicitação Registrada com Sucesso!
+                      Mensagem enviada com sucesso!
                     </h3>
                     <p className="text-sm text-slate-300 max-w-md mx-auto">
-                      Recebemos os dados do seu escopo e notificamos nossa equipe por e-mail. Em breve um especialista da CyberOregon entrará em contato.
+                      Recebemos seus dados e em breve um especialista da CyberOregon entrará em contato para conversar sobre seu cenário. O orçamento final é definido após esse alinhamento.
                     </p>
                     <button
                       type="button"
                       onClick={() => setSubmitted(false)}
                       className="px-5 py-2.5 rounded-xl bg-white/10 text-xs font-mono uppercase tracking-wider text-white hover:bg-white/15"
                     >
-                      Enviar nova solicitação
+                      Enviar nova mensagem
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex items-center justify-between pb-3 border-b border-white/10">
                       <span className="font-mono text-xs uppercase tracking-widest text-[#00EAFF] font-bold">
-                        SOLICITAR PROPOSTA / BRIEFING TÉCNICO
+                        FALE COM UM ESPECIALISTA
                       </span>
                       <span className="font-mono text-[11px] text-slate-400">
                         TLS 1.3 SECURE
@@ -241,7 +241,7 @@ export const ContactSection = () => {
                         htmlFor="co-message"
                         className="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5"
                       >
-                        Detalhes do Escopo (opcional)
+                        Conte um pouco sobre seu cenário (opcional)
                       </label>
                       <textarea
                         id="co-message"
@@ -249,7 +249,7 @@ export const ContactSection = () => {
                         maxLength={1500}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Informe URLs, quantidade de APIs, prazo desejado ou observações..."
+                        placeholder="Conte sobre seu ambiente, objetivo ou dúvida. Alinhamos o escopo juntos na conversa."
                         className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm placeholder:text-slate-500 focus:border-[#00EAFF] focus:outline-none resize-none"
                       />
                     </div>
@@ -262,12 +262,12 @@ export const ContactSection = () => {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          <span>Enviando Solicitação...</span>
+                          <span>Enviando mensagem...</span>
                         </>
                       ) : (
                         <>
                           <Send className="w-4 h-4" />
-                          <span>Enviar Solicitação de Proposta</span>
+                          <span>Falar com um Especialista</span>
                         </>
                       )}
                     </button>
@@ -287,7 +287,7 @@ export const ContactSection = () => {
                 Proteja a reputação e a continuidade do seu negócio hoje.
               </h2>
               <p className="text-slate-200 text-base leading-relaxed">
-                Agende uma reunião técnica de alinhamento sob NDA. Nossos engenheiros avaliam sua arquitetura e entregam um plano de ação sob medida em até 24h.
+                Converse com nossos especialistas para entendermos seu cenário e alinharmos o escopo técnico sob NDA. A proposta e o orçamento final são preparados depois dessa conversa.
               </p>
 
               <div className="space-y-3.5 pt-2">

@@ -57,11 +57,11 @@ export function SiteHeader({ isContactPage = false }: { isContactPage?: boolean 
         </div>
         <div className="flex items-center gap-5">
           <a
-            href={isContactPage ? "/#simulador" : "#simulador"}
+            href="/contato"
             className="inline-flex items-center gap-1.5 text-[#00EAFF] hover:text-cyan-200 font-semibold transition-colors"
           >
             <ShieldCheck className="w-3.5 h-3.5" />
-            Dimensionar Escopo sob NDA
+            Falar com Especialista
           </a>
           <a
             href="mailto:contato@cyberoregon.com.br"

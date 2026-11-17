@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 export const metadata: Metadata = {
   title: "Fale Conosco | CyberOregon",
   description:
-    "Entre em contato com a CyberOregon para solicitar uma proposta de Pentest, Red Team ou Security Review.",
+    "Converse com um especialista da CyberOregon sobre Pentest, Red Team ou Security Review. O orçamento final é definido após o alinhamento do cenário.",
 };
 
 export default function ContactPage() {
