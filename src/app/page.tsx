@@ -17,7 +17,6 @@ import {
   CheckCircle2,
   ArrowRight,
   ArrowUpRight,
-  MessageCircle,
   ChevronDown,
   Crosshair,
   Mail,
@@ -25,11 +24,11 @@ import {
 
 import { trackMetaEvent } from "@/components/MetaPixel";
 import { CountUp, Reveal } from "@/components/ui/MotionKit";
-import { useDemoTheme } from "@/components/ui/DemoShell";
+import { ContactSection } from "@/components/ui/ContactSection";
 import { StickyMobileCta } from "@/components/ui/StickyMobileCta";
+import { SiteFooter } from "@/components/ui/SiteFooter";
 import {
   LOGO_DARK_SRC,
-  LOGO_LIGHT_SRC,
   SiteHeader,
 } from "@/components/ui/SiteHeader";
 import { contactHref, type ContactServiceKey } from "@/lib/contact";
@@ -37,8 +36,6 @@ import { contactHref, type ContactServiceKey } from "@/lib/contact";
 // ==========================================
 // CONFIGURAÇÕES GERAIS E CONSTANTES
 // ==========================================
-const CURRENT_YEAR = 2026;
-
 // ==========================================
 // DADOS DO ECOSSISTEMA DE SEGURANÇA (ESTILO GUARDSI)
 // ==========================================
@@ -311,14 +308,6 @@ const Hero = () => {
                 <span>Falar com Especialista</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
-
-              {/* <a
-                href="/contato"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#051430]/90 hover:bg-[#09224C] border border-[#00D4FF]/40 text-white font-bold text-sm transition-all backdrop-blur-md"
-              >
-                <MessageCircle className="w-4 h-4 text-[#00EAFF]" />
-                <span>Falar com Especialista</span>
-              </a> */}
             </div>
 
             {/* Trust Metrics Strip */}
@@ -1474,71 +1463,6 @@ const FAQSection = () => {
   );
 };
 
-// 11. RODAPÉ CORPORATIVO CYBEROREGON (SEM NEW DATE() BLOCKING WARNING)
-// ==========================================
-const Footer = () => {
-  const theme = useDemoTheme();
-
-  return (
-    <footer className="bg-[#010714] border-t border-[#00D4FF]/20 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-8 border-b border-white/10">
-          <div className="space-y-3">
-            <div className="inline-flex items-center rounded-xl bg-[#020b1f] px-3 py-1.5 border border-[#00D4FF]/30">
-              <Image
-                src={theme === "claro" ? LOGO_LIGHT_SRC : LOGO_DARK_SRC}
-                alt="CyberOregon Cybersecurity"
-                width={200}
-                height={38}
-                className="h-8 w-auto object-contain"
-              />
-            </div>
-            <p className="text-xs text-slate-400 max-w-sm">
-              Serviços especializados em Pentest, Red Team e Security Review para aplicações, infraestrutura, identidade e código-fonte.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-5">
-            <div className="flex flex-wrap gap-6 text-xs font-mono uppercase tracking-wider text-slate-300">
-              <a href="#solucoes" className="hover:text-[#00EAFF] transition-colors">
-                Soluções
-              </a>
-              <a href="#simulador" className="hover:text-[#00EAFF] transition-colors">
-                Simulador de Escopo
-              </a>
-              <a href="#metodologia" className="hover:text-[#00EAFF] transition-colors">
-                Metodologia
-              </a>
-              <a href="#faq" className="hover:text-[#00EAFF] transition-colors">
-                FAQ
-              </a>
-              <a href="/contato" className="text-[#00EAFF] hover:underline">
-                Fale conosco
-              </a>
-            </div>
-            <a
-              href="mailto:contato@cyberoregon.com.br"
-              className="flex items-center gap-2 border-t border-white/10 pt-4 text-sm font-mono text-[#00EAFF] hover:text-cyan-200 transition-colors"
-            >
-              <Mail aria-hidden="true" className="w-4 h-4 shrink-0" />
-              contato@cyberoregon.com.br
-            </a>
-          </div>
-        </div>
-
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
-          <p>
-            © {CURRENT_YEAR} CYBEROREGON CYBERSECURITY. TODOS OS DIREITOS RESERVADOS.
-          </p>
-          <p className="text-slate-500">
-            OWASP • PTES • MITRE ATT&amp;CK • CIS BENCHMARKS
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
 // ==========================================
 // EXPORT PRINCIPAL DA PÁGINA
 // ==========================================
@@ -1556,8 +1480,9 @@ export default function CyberOregonLandingPage() {
         <MethodologySection />
         <WhyCyberOregon />
         <FAQSection />
+        <ContactSection />
       </main>
-      <Footer />
+      <SiteFooter />
       <StickyMobileCta
         label="Falar com Especialista"
         href="/contato"

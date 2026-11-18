@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { Award, AlertCircle, Lock, Loader2, Send, ShieldCheck, Zap } from "lucide-react";
 import { trackMetaEvent } from "@/components/MetaPixel";
 import { saveCyberOregonLead } from "@/app/actions/leads";
-import { Confetti } from "@/components/ui/MotionKit";
 import { CONTACT_SERVICES } from "@/lib/contact";
 
-export const ContactSection = () => {
+export const ContactSection = ({ spacious = false }: { spacious?: boolean }) => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
@@ -79,32 +77,24 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contato" className="pt-32 sm:pt-36 lg:pt-48 pb-24 lg:pb-32 relative overflow-hidden bg-[#020b1f]">
+    <section
+      id="contato"
+      className={`pb-24 lg:pb-32 relative bg-[#020b1f] ${
+        spacious ? "pt-32 sm:pt-36 lg:pt-48" : "pt-24 lg:pt-32"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="relative rounded-3xl bg-[#04122C] border border-[#00D4FF]/50 p-6 sm:p-10 lg:p-14 shadow-[0_30px_90px_rgba(0,0,0,0.9)] overflow-hidden">
-          {/* Background Image inside CTA Container */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-            <Image
-              src="/images/templates/cyber-oregon/preocupe-se-com-a-ciberseguranca-de-sua-empresa.png"
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover object-center opacity-25 mix-blend-luminosity"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#020b1f] via-[#020b1f]/90 to-[#04122C]/85" />
-          </div>
-
-          <div className="relative z-10 grid lg:grid-cols-12 gap-10 items-start">
+        <div className="rounded-2xl bg-[#04122C] border border-slate-700 p-6 sm:p-10 lg:p-14">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
             {/* Right Form */}
             <div className="lg:order-2 lg:col-span-6">
-              <div className="rounded-2xl bg-[#020b1f]/95 border border-[#00D4FF]/30 p-6 sm:p-8 backdrop-blur-xl">
+              <div className="rounded-xl bg-[#020b1f] border border-slate-700 p-6 sm:p-8">
                 {submitted ? (
                   <div className="text-center py-8 space-y-4">
-                    <Confetti />
-                    <div className="w-14 h-14 rounded-2xl bg-[#00EAFF]/20 border border-[#00EAFF] text-[#00EAFF] flex items-center justify-center mx-auto">
+                    <div className="w-14 h-14 rounded-xl bg-slate-800 border border-slate-600 text-slate-100 flex items-center justify-center mx-auto">
                       <ShieldCheck className="w-7 h-7" />
                     </div>
-                    <h3 className="text-xl font-black text-white">
+                    <h3 className="font-sans text-xl font-bold text-white">
                       Mensagem enviada com sucesso!
                     </h3>
                     <p className="text-sm text-slate-300 max-w-md mx-auto">
@@ -113,22 +103,13 @@ export const ContactSection = () => {
                     <button
                       type="button"
                       onClick={() => setSubmitted(false)}
-                      className="px-5 py-2.5 rounded-xl bg-white/10 text-xs font-mono uppercase tracking-wider text-white hover:bg-white/15"
+                      className="px-5 py-2.5 rounded-lg bg-white/10 text-sm font-medium text-white hover:bg-white/15"
                     >
                       Enviar nova mensagem
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                      <span className="font-mono text-xs uppercase tracking-widest text-[#00EAFF] font-bold">
-                        FALE COM UM ESPECIALISTA
-                      </span>
-                      <span className="font-mono text-[11px] text-slate-400">
-                        TLS 1.3 SECURE
-                      </span>
-                    </div>
-
                     {errorMsg && (
                       <div
                         role="alert"
@@ -143,7 +124,7 @@ export const ContactSection = () => {
                       <div>
                         <label
                           htmlFor="co-name"
-                          className="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5"
+                          className="block text-sm font-medium text-slate-200 mb-1.5"
                         >
                           Seu Nome *
                         </label>
@@ -156,13 +137,13 @@ export const ContactSection = () => {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Ex: Rodrigo Almeida"
-                          className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm placeholder:text-slate-500 focus:border-[#00EAFF] focus:outline-none"
+                          className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-600 text-white text-sm placeholder:text-slate-500 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none"
                         />
                       </div>
                       <div>
                         <label
                           htmlFor="co-company"
-                          className="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5"
+                          className="block text-sm font-medium text-slate-200 mb-1.5"
                         >
                           Empresa / Organização
                         </label>
@@ -172,7 +153,7 @@ export const ContactSection = () => {
                           value={company}
                           onChange={(e) => setCompany(e.target.value)}
                           placeholder="Ex: FinTech Brasil S.A."
-                          className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm placeholder:text-slate-500 focus:border-[#00EAFF] focus:outline-none"
+                          className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-600 text-white text-sm placeholder:text-slate-500 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none"
                         />
                       </div>
                     </div>
@@ -181,7 +162,7 @@ export const ContactSection = () => {
                       <div>
                         <label
                           htmlFor="co-email"
-                          className="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5"
+                          className="block text-sm font-medium text-slate-200 mb-1.5"
                         >
                           E-mail Corporativo *
                         </label>
@@ -193,13 +174,13 @@ export const ContactSection = () => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="rodrigo@suaempresa.com.br"
-                          className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm placeholder:text-slate-500 focus:border-[#00EAFF] focus:outline-none"
+                          className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-600 text-white text-sm placeholder:text-slate-500 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none"
                         />
                       </div>
                       <div>
                         <label
                           htmlFor="co-phone"
-                          className="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5"
+                          className="block text-sm font-medium text-slate-200 mb-1.5"
                         >
                           Telefone / Contato
                         </label>
@@ -210,7 +191,7 @@ export const ContactSection = () => {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="(11) 99999-9999"
-                          className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm placeholder:text-slate-500 focus:border-[#00EAFF] focus:outline-none"
+                          className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-600 text-white text-sm placeholder:text-slate-500 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none"
                         />
                       </div>
                     </div>
@@ -218,7 +199,7 @@ export const ContactSection = () => {
                     <div>
                       <label
                         htmlFor="co-service"
-                        className="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5"
+                        className="block text-sm font-medium text-slate-200 mb-1.5"
                       >
                         Solução Desejada
                       </label>
@@ -226,7 +207,7 @@ export const ContactSection = () => {
                         id="co-service"
                         value={service}
                         onChange={(e) => setService(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm focus:border-[#00EAFF] focus:outline-none"
+                        className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-600 text-white text-sm focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none"
                       >
                         {Object.entries(CONTACT_SERVICES).map(([key, label]) => (
                           <option key={key} value={label}>
@@ -239,7 +220,7 @@ export const ContactSection = () => {
                     <div>
                       <label
                         htmlFor="co-message"
-                        className="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5"
+                        className="block text-sm font-medium text-slate-200 mb-1.5"
                       >
                         Conte um pouco sobre seu cenário (opcional)
                       </label>
@@ -250,14 +231,14 @@ export const ContactSection = () => {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Conte sobre seu ambiente, objetivo ou dúvida. Alinhamos o escopo juntos na conversa."
-                        className="w-full px-4 py-3 rounded-xl bg-[#04122C] border border-white/15 text-white text-sm placeholder:text-slate-500 focus:border-[#00EAFF] focus:outline-none resize-none"
+                        className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-600 text-white text-sm placeholder:text-slate-500 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#0088CC] via-[#00C4F0] to-[#00EAFF] text-[#020b1f] font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(0,234,255,0.4)] hover:opacity-95 disabled:opacity-60 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+                      className="w-full py-4 px-6 rounded-lg bg-sky-700 text-white font-semibold text-sm hover:bg-sky-600 disabled:opacity-60 transition-colors flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? (
                         <>
@@ -267,7 +248,7 @@ export const ContactSection = () => {
                       ) : (
                         <>
                           <Send className="w-4 h-4" />
-                          <span>Falar com um Especialista</span>
+                          <span>Agende uma conversa</span>
                         </>
                       )}
                     </button>
@@ -278,12 +259,7 @@ export const ContactSection = () => {
 
             {/* Left Callout */}
             <div className="lg:order-1 lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/35 mb-5 backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-full bg-[#00EAFF] animate-pulse shadow-[0_0_8px_#00EAFF]" />
-                <span className="font-mono text-[11px] font-bold text-[#00EAFF] tracking-widest">[SEC-07]</span>
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-100 font-semibold">Canal Direto com Especialistas</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+              <h2 className="font-sans text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
                 Proteja a reputação e a continuidade do seu negócio hoje.
               </h2>
               <p className="text-slate-200 text-base leading-relaxed">
@@ -292,19 +268,19 @@ export const ContactSection = () => {
 
               <div className="space-y-3.5 pt-2">
                 <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
+                  <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-600 flex items-center justify-center text-slate-200">
                     <Lock className="w-4 h-4" />
                   </div>
                   <span>Assinatura de NDA (Acordo de Confidencialidade) antes do briefing</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
+                  <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-600 flex items-center justify-center text-slate-200">
                     <Zap className="w-4 h-4" />
                   </div>
                   <span>Atendimento ágil diretamente com líder de Segurança Ofensiva</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-slate-200">
-                  <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/20 border border-[#00EAFF]/40 flex items-center justify-center text-[#00EAFF]">
+                  <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-600 flex items-center justify-center text-slate-200">
                     <Award className="w-4 h-4" />
                   </div>
                   <span>Escopos completos de Pentest, Red Team e Security Review</span>

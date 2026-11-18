@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactSection } from "@/components/ui/ContactSection";
+import { SiteFooter } from "@/components/ui/SiteFooter";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 
 export const metadata: Metadata = {
@@ -13,8 +14,9 @@ export default function ContactPage() {
     <div className="cyber-oregon-page demo-dark min-h-screen bg-[#020b1f] text-slate-100 selection:bg-[#00EAFF] selection:text-[#020b1f] font-sans antialiased overflow-x-hidden">
       <SiteHeader isContactPage />
       <main id="conteudo">
-        <ContactSection />
+        <ContactSection spacious />
       </main>
+      <SiteFooter isContactPage />
     </div>
   );
 }
