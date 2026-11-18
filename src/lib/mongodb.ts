@@ -32,6 +32,10 @@ async function connect(): Promise<Db> {
       .collection("cyber_oregon_leads")
       .createIndex({ deleteAfter: 1 }, { expireAfterSeconds: 0 }),
     db.collection("cyber_oregon_leads").createIndex({ createdAt: -1 }),
+    db
+      .collection("cyber_oregon_newsletter")
+      .createIndex({ email: 1 }, { unique: true }),
+    db.collection("cyber_oregon_newsletter").createIndex({ createdAt: -1 }),
   ]);
 
   return db;

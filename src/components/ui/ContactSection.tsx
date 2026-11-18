@@ -1,9 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Award, AlertCircle, Lock, Loader2, Send, ShieldCheck, Zap } from "lucide-react";
+import {
+  Award,
+  AlertCircle,
+  CheckCircle2,
+  Lock,
+  Loader2,
+  Mail,
+  Send,
+  ShieldCheck,
+  Zap,
+} from "lucide-react";
 import { trackMetaEvent } from "@/components/MetaPixel";
 import { saveCyberOregonLead } from "@/app/actions/leads";
+import { subscribeCyberOregonNewsletter } from "@/app/actions/newsletter";
 import { CONTACT_SERVICES } from "@/lib/contact";
 
 export const ContactSection = ({ spacious = false }: { spacious?: boolean }) => {
@@ -16,6 +27,11 @@ export const ContactSection = ({ spacious = false }: { spacious?: boolean }) => 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterConsent, setNewsletterConsent] = useState(false);
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [newsletterError, setNewsletterError] = useState("");
+  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
   /* eslint-disable react-hooks/set-state-in-effect -- Restore the URL fragment after hydration. */
   useEffect(() => {
@@ -73,6 +89,36 @@ export const ContactSection = ({ spacious = false }: { spacious?: boolean }) => 
       );
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterConsent) return;
+
+    setIsSubscribing(true);
+    setNewsletterError("");
+
+    try {
+      await subscribeCyberOregonNewsletter({
+        email: newsletterEmail,
+        consent: newsletterConsent,
+      });
+      trackMetaEvent("Subscribe", {
+        content_name: "Newsletter CyberOregon",
+        content_category: "newsletter",
+      });
+      setNewsletterSubscribed(true);
+      setNewsletterEmail("");
+      setNewsletterConsent(false);
+    } catch (err) {
+      setNewsletterError(
+        err instanceof Error
+          ? err.message
+          : "Não foi possível concluir sua inscrição. Tente novamente."
+      );
+    } finally {
+      setIsSubscribing(false);
     }
   };
 
@@ -286,8 +332,91 @@ export const ContactSection = ({ spacious = false }: { spacious?: boolean }) => 
                   <span>Escopos completos de Pentest, Red Team e Security Review</span>
                 </div>
               </div>
+
             </div>
           </div>
+        </div>
+
+        <div className="mt-6 rounded-xl border border-slate-700 bg-[#04122C] p-6 sm:p-8">
+          {newsletterSubscribed ? (
+            <div
+              role="status"
+              className="flex items-center gap-3 text-slate-100"
+            >
+              <CheckCircle2 className="h-6 w-6 shrink-0 text-sky-400" />
+              <div>
+                <p className="font-semibold">Inscrição confirmada.</p>
+                <p className="text-sm text-slate-300">
+                  Você receberá nossas dicas e informações por e-mail.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+              <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6">
+                <div className="min-w-0 flex-1">
+                  <label
+                    htmlFor="co-newsletter-email"
+                    className="block text-lg font-medium text-slate-200 mb-1.5"
+                  >
+                    Newsletter
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                    <input
+                      id="co-newsletter-email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      maxLength={150}
+                      value={newsletterEmail}
+                      onChange={(event) => setNewsletterEmail(event.target.value)}
+                      placeholder="seuemail@empresa.com.br"
+                      className="w-full rounded-lg border border-slate-600 bg-slate-950 py-3 pl-11 pr-4 text-sm text-white placeholder:text-slate-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubscribing || !newsletterConsent}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-sky-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-sky-600 disabled:cursor-not-allowed disabled:opacity-60 lg:mt-7"
+                >
+                  {isSubscribing ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Inscrevendo...
+                    </>
+                  ) : (
+                    "Inscrever-se"
+                  )}
+                </button>
+              </div>
+
+              <label className="flex cursor-pointer items-start gap-3 text-sm text-slate-300">
+                <input
+                  type="checkbox"
+                  required
+                  checked={newsletterConsent}
+                  onChange={(event) => setNewsletterConsent(event.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-sky-600"
+                />
+                <span>
+                  Receba nossa newsletter com dicas e informações.
+                </span>
+              </label>
+
+              {newsletterError && (
+                <div
+                  role="alert"
+                  className="flex items-center gap-2 rounded-lg border border-rose-500/40 bg-rose-500/15 p-3 text-xs text-rose-200"
+                >
+                  <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+                  <span>{newsletterError}</span>
+                </div>
+              )}
+            </form>
+          )}
         </div>
       </div>
     </section>
