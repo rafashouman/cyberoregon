@@ -63,7 +63,7 @@ const SOLUTIONS: SolutionItem[] = [
   {
     id: "pentest",
     tag: "01 • PENTEST",
-    title: "Pentest Especializado & Source Code Review",
+    title: "Pentest Especializado & Code Review",
     subtitle: "Web, APIs, MCP, Mobile, IA, Kiosk, Desktop (Thick Client), Interno, Externo & CAPT",
     description:
       "Testes de intrusão conduzidos manualmente para identificar vulnerabilidades exploráveis em aplicações, infraestrutura e código-fonte. Atuamos em superfícies tradicionais e modernas — incluindo sistemas de Inteligência Artificial, servidores MCP, terminais Kiosk e aplicações Desktop.",
@@ -74,7 +74,7 @@ const SOLUTIONS: SolutionItem[] = [
       "Pentest em Aplicações Web, APIs e Aplicativos Mobile",
       "Pentest em Sistemas de Inteligência Artificial, MCP e Kiosk",
       "Pentest Interno, Externo e Aplicações Desktop (Thick Client)",
-      "Code Assisted Pen Test (CAPT) e Source Code Review",
+      "Code Assisted Pen Test (CAPT) e Code Review",
     ],
     frameworks: ["OWASP Top 10", "OWASP API & LLM", "PTES", "NIST SP 800-115"],
     terminalPreview: {
@@ -159,7 +159,7 @@ const METHODOLOGY_STEPS = [
   {
     step: "03",
     title: "Exploração Manual & Revisão Profunda",
-    desc: "Execução manual de testes em Web, Mobile, IA, MCP, Kiosk, Desktop ou revisão de código (CAPT / Source Code Review) e simulação de TTPs.",
+    desc: "Execução manual de testes em Web, Mobile, IA, MCP, Kiosk, Desktop ou revisão de código (CAPT / Code Review) e simulação de TTPs.",
     badge: "Zero Falso-Positivo",
   },
   {
@@ -179,11 +179,11 @@ const METHODOLOGY_STEPS = [
 const FAQS = [
   {
     q: "Qual a diferença entre Pentest, Red Team e Security Review na CyberOregon?",
-    a: "O Pentest busca identificar e explorar vulnerabilidades em ativos específicos (como Web, APIs, Mobile, MCP, Kiosk, IA, Desktop, rede interna/externa ou código-fonte via CAPT e Source Code Review). O Red Team simula adversários reais em cenários como Red Team Exercise, Testes de Engenharia Social, Purple Team / Simulação de TTPs e Assumed Breach. Já o Security Review avalia profundamente arquiteturas e configurações críticas como Microsoft Entra ID, Active Directory, Microsoft 365, Cloud, Build Pipeline, Segmentação, Exposição de Credenciais, Superfície de Ataque e Gestão de Vulnerabilidades.",
+    a: "O Pentest busca identificar e explorar vulnerabilidades em ativos específicos (como Web, APIs, Mobile, MCP, Kiosk, IA, Desktop, rede interna/externa ou código-fonte via CAPT e Code Review). O Red Team simula adversários reais em cenários como Red Team Exercise, Testes de Engenharia Social, Purple Team / Simulação de TTPs e Assumed Breach. Já o Security Review avalia profundamente arquiteturas e configurações críticas como Microsoft Entra ID, Active Directory, Microsoft 365, Cloud, Build Pipeline, Segmentação, Exposição de Credenciais, Superfície de Ataque e Gestão de Vulnerabilidades.",
   },
   {
     q: "O que é Code Assisted Pen Test (CAPT) e quando vale a pena contratar?",
-    a: "No Code Assisted Pen Test (CAPT), nossos especialistas combinam testes dinâmicos de intrusão com acesso parcial ou total ao código-fonte da aplicação. Isso acelera a descoberta de falhas lógicas complexas, bypasses de autenticação e vulnerabilidades difíceis de detectar apenas em caixa-preta, complementando o Source Code Review.",
+    a: "No Code Assisted Pen Test (CAPT), nossos especialistas combinam testes dinâmicos de intrusão com acesso parcial ou total ao código-fonte da aplicação. Isso acelera a descoberta de falhas lógicas complexas, bypasses de autenticação e vulnerabilidades difíceis de detectar apenas em caixa-preta, complementando o Code Review.",
   },
   {
     q: "Como funcionam os testes em Sistemas de Inteligência Artificial, MCP e Kiosk?",
@@ -435,7 +435,7 @@ const Hero = () => {
                           [✓ REMEDIAÇÃO VALIDADA NO RETESTE]
                         </p>
                         <p className="text-[11px] text-slate-200">
-                          Correção aplicada com apoio do Source Code Review e validada pela CyberOregon.
+                          Correção aplicada com apoio do Code Review e validada pela CyberOregon.
                         </p>
                       </div>
                     </div>
@@ -788,7 +788,7 @@ const AttackSurfacesGrid = () => {
         "Pentest em Sistemas de Inteligência Artificial",
         "Pentest em Aplicações Desktop (Thick Client)",
         "Code Assisted Pen Test (CAPT)",
-        "Source Code Review",
+        "Code Review",
       ],
     },
     {

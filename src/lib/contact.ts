@@ -1,7 +1,7 @@
 export const CONTACT_SERVICES = {
   pentest: "Pentest (Web / APIs / MCP / Mobile / IA / CAPT)",
   infrastructure: "Pentest Interno, Externo, Kiosk & Desktop (Thick Client)",
-  code: "Source Code Review & Code Assisted Pen Test (CAPT)",
+  code: "Code Review & Code Assisted Pen Test (CAPT)",
   "red-team": "Red Team (Exercise, Engenharia Social, Purple Team, Assumed Breach)",
   "security-review": "Security Review (Entra ID, AD, M365, Cloud, Pipeline & Gestão de Vulnerabilidades)",
   combined: "Escopo combinado (conforme detalhes)",

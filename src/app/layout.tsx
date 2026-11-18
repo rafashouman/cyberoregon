@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "CyberOregon | Pentest, Red Team & Security Review",
   description:
-    "Serviços especializados em Pentest (Web, APIs, MCP, Mobile, IA, Kiosk, Desktop, CAPT e Source Code Review), Red Team e Security Review.",
+    "Serviços especializados em Pentest (Web, APIs, MCP, Mobile, IA, Kiosk, Desktop, CAPT e Code Review), Red Team e Security Review.",
 };
 
 export default function RootLayout({
