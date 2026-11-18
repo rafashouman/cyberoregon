@@ -305,7 +305,7 @@ const Hero = () => {
                 className="group relative inline-flex items-center justify-center gap-3 px-7 py-4 rounded-xl bg-gradient-to-r from-[#0088CC] via-[#00C4F0] to-[#00EAFF] text-[#020b1f] font-black text-sm uppercase tracking-wider shadow-[0_0_35px_rgba(0,212,255,0.45)] hover:shadow-[0_0_50px_rgba(0,234,255,0.7)] transition-all active:scale-[0.98]"
               >
                 <Terminal className="w-4 h-4" />
-                <span>Falar com Especialista</span>
+                <span>Agende uma conversa</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
@@ -743,7 +743,7 @@ const SolutionsSection = () => {
                       href={contactHref(current.id)}
                       className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#0088CC] to-[#00EAFF] text-[#020b1f] font-black text-xs uppercase tracking-wider shrink-0 hover:opacity-95 transition-all"
                     >
-                      <span>Fale com um Especialista</span>
+                      <span>Agende uma conversa</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </a>
                   </div>
@@ -1159,7 +1159,7 @@ const PentestScopeCalculator = () => {
                 className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#0088CC] via-[#00C4F0] to-[#00EAFF] text-[#020b1f] font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(0,234,255,0.4)] hover:opacity-95 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
               >
                 <Mail className="w-4 h-4" />
-                <span>Falar com Especialista sobre este Escopo</span>
+                <span>Agende uma conversa sobre o Escopo</span>
               </a>
               <p className="text-[11px] font-mono text-center text-slate-300">
                 Estimativa preliminar: alinhamos o escopo em conversa antes do orçamento final.
@@ -1484,7 +1484,7 @@ export default function CyberOregonLandingPage() {
       </main>
       <SiteFooter />
       <StickyMobileCta
-        label="Falar com Especialista"
+        label="Agende uma conversa"
         href="/contato"
         className="bg-gradient-to-r from-[#0088CC] to-[#00EAFF] text-[#020b1f] shadow-[0_0_30px_rgba(0,234,255,0.45)]"
       />
