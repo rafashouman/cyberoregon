@@ -17,15 +17,13 @@ export function SiteFooter({ isContactPage = false }: { isContactPage?: boolean 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-8 border-b border-white/10">
           <div className="space-y-3">
-            <div className="inline-flex items-center rounded-xl bg-[#020b1f] px-3 py-1.5 border border-[#00D4FF]/30">
               <Image
                 src={theme === "claro" ? LOGO_LIGHT_SRC : LOGO_DARK_SRC}
                 alt="CyberOregon Cybersecurity"
-                width={200}
-                height={38}
+                width={278}
+                height={53}
                 className="h-8 w-auto object-contain"
               />
-            </div>
             <p className="text-xs text-slate-400 max-w-sm">
               Serviços especializados em Pentest, Red Team e Security Review para aplicações, infraestrutura, identidade e código-fonte.
             </p>

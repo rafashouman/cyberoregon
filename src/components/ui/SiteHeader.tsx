@@ -7,10 +7,16 @@ import { ArrowUpRight, Mail, Menu, ShieldCheck, X } from "lucide-react";
 import { useDemoTheme } from "@/components/ui/DemoShell";
 import { useActiveSection } from "@/components/ui/useActiveSection";
 
-export const LOGO_DARK_SRC = "/images/templates/cyber-oregon/logo-cyber-oregon-dark.png";
-export const LOGO_LIGHT_SRC = "/images/templates/cyber-oregon/logo-cyber-oregon.png";
+export const LOGO_DARK_SRC =
+  "/images/templates/cyber-oregon/logo-cyber-oregon-dark.png";
+export const LOGO_LIGHT_SRC =
+  "/images/templates/cyber-oregon/logo-cyber-oregon.png";
 
-export function SiteHeader({ isContactPage = false }: { isContactPage?: boolean }) {
+export function SiteHeader({
+  isContactPage = false,
+}: {
+  isContactPage?: boolean;
+}) {
   const theme = useDemoTheme();
   const [scrolled, setScrolled] = useState(false);
   const activeSection = useActiveSection([
@@ -42,7 +48,9 @@ export function SiteHeader({ isContactPage = false }: { isContactPage?: boolean 
       {/* Top Status Strip */}
       <div
         className={`max-w-7xl mx-auto mb-2 transition-all duration-300 pointer-events-auto hidden lg:flex flex-wrap gap-x-4 gap-y-1 items-center justify-between px-4 py-1.5 rounded-xl bg-[#020b1f]/90 backdrop-blur-md border border-[#00D4FF]/25 text-[11px] font-mono text-slate-300 ${
-          scrolled ? "opacity-0 -translate-y-3 pointer-events-none hidden" : "opacity-100"
+          scrolled
+            ? "opacity-0 -translate-y-3 pointer-events-none hidden"
+            : "opacity-100"
         }`}
       >
         <div className="flex items-center gap-4">
@@ -88,16 +96,14 @@ export function SiteHeader({ isContactPage = false }: { isContactPage?: boolean 
             aria-label="CyberOregon — Início"
             className="flex min-w-0 items-center gap-3 group"
           >
-            <div className="relative flex items-center rounded-xl overflow-hidden px-2 py-1 bg-[#020b1f] border border-[#00D4FF]/30 group-hover:border-[#00EAFF] shadow-[0_0_25px_rgba(0,212,255,0.2)] transition-all duration-300">
-              <Image
-                src={theme === "claro" ? LOGO_LIGHT_SRC : LOGO_DARK_SRC}
-                alt="CyberOregon Cybersecurity"
-                width={230}
-                height={44}
-                priority
-                className="w-24 min-[360px]:w-32 sm:w-auto h-auto sm:h-10 max-w-full object-contain"
-              />
-            </div>
+            <Image
+              src={theme === "claro" ? LOGO_LIGHT_SRC : LOGO_DARK_SRC}
+              alt="CyberOregon Cybersecurity"
+              width={350}
+              height={67}
+              priority
+              className="w-24 min-[360px]:w-32 sm:w-auto h-auto sm:h-10 max-w-full object-contain"
+            />
           </Link>
 
           {/* Desktop Links */}
@@ -139,8 +145,14 @@ export function SiteHeader({ isContactPage = false }: { isContactPage?: boolean 
                 aria-label="Menu de navegação"
                 className="flex cursor-pointer list-none p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 hover:text-[#00EAFF] [&::-webkit-details-marker]:hidden"
               >
-                <Menu aria-hidden="true" className="w-5 h-5 group-open:hidden" />
-                <X aria-hidden="true" className="hidden w-5 h-5 group-open:block" />
+                <Menu
+                  aria-hidden="true"
+                  className="w-5 h-5 group-open:hidden"
+                />
+                <X
+                  aria-hidden="true"
+                  className="hidden w-5 h-5 group-open:block"
+                />
               </summary>
               <nav
                 aria-label="Navegação mobile CyberOregon"
@@ -150,7 +162,11 @@ export function SiteHeader({ isContactPage = false }: { isContactPage?: boolean 
                   <a
                     key={item.id}
                     href={isContactPage ? `/#${item.id}` : `#${item.id}`}
-                    onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}
+                    onClick={(event) =>
+                      event.currentTarget
+                        .closest("details")
+                        ?.removeAttribute("open")
+                    }
                     className="block px-3.5 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider text-slate-200 hover:bg-[#00D4FF]/20 hover:text-[#00EAFF]"
                   >
                     {item.label}
@@ -160,7 +176,10 @@ export function SiteHeader({ isContactPage = false }: { isContactPage?: boolean 
                   href="mailto:contato@cyberoregon.com.br"
                   className="mt-2 flex items-center gap-2 border-t border-white/10 px-3.5 pt-4 pb-2.5 text-xs font-mono text-slate-300 hover:text-[#00EAFF] transition-colors"
                 >
-                  <Mail aria-hidden="true" className="w-4 h-4 shrink-0 text-[#00EAFF]" />
+                  <Mail
+                    aria-hidden="true"
+                    className="w-4 h-4 shrink-0 text-[#00EAFF]"
+                  />
                   contato@cyberoregon.com.br
                 </a>
               </nav>
